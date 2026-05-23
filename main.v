@@ -32,7 +32,7 @@ fn main() {
       if width < get_line_length() || height < (get_peony().len /get_line_length()) {
          s.print_text_centered("terminal too small", 0)
       } else {
-         s.set_fg_color(TermColor.magenta)
+         s.set_fg_color(TermColor.white)
          // particle
          spawn_count := rand.int_in_range(2, 5) or { 1 }
          for _ in 0 .. spawn_count {
@@ -63,10 +63,7 @@ fn main() {
             }
          }
 
-         // text
-
-         // blume
-         s.set_fg_color(TermColor.white)
+         s.set_fg_color(TermColor.magenta)
          s.print_centered_object(get_peony(), get_line_length())
       }
 
