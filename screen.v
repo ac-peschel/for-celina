@@ -21,6 +21,18 @@ fn (s Screen) print_text_centered(text string, y_offset int) {
 	} else {
 		s.move_cursor(start_pos, (s.height / 2) + y_offset)
 		print(text.replace("*", " "))
+		//s.custom_print(text, start_pos, (s.height / 2) + y_offset)
+	}
+}
+
+fn (s Screen) custom_print(text string, start_x int, start_y int) {
+	s.move_cursor(start_x, start_y)
+	r := text.runes()
+	for i := 0; i < r.len; i++ {
+		if r[i] != `*` {
+			s.move_cursor(start_x + i, start_y)
+			print(r[i])
+		}
 	}
 }
 
@@ -41,6 +53,16 @@ fn (s Screen) print_centered_object(obj string, cols int) {
 		y_offset := i - center
 		s.print_text_centered(line, y_offset)
 	}
+}
+
+fn (s Screen) erase_particle(p Particle) {
+	s.move_cursor(p.last_x, p.last_y)
+	print(" ")
+}
+
+fn (s Screen) draw_particle(p Particle) {
+	s.move_cursor(int(p.x), int(p.y))
+	print("${p.sym}")
 }
 
 fn (s Screen) move_cursor(x int, y int) {
